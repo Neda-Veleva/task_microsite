@@ -11,7 +11,17 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@home');
+
+Route::get('/information', 'HomeController@info');
+
+Route::get('/inquiries', 'HomeController@createInquiries');
+Route::post('/inquiries', 'HomeController@storeInquiries');
+
+Route::get('/admin/logout', 'UserController@logout');
+
+Route::get('/admin/create', 'UserController@create');
+Route::post('admin/', array('before'=>'csrf', 'uses'=>'UserController@store'));
+
+Route::get('/admin/login', 'UserController@getLogin');
+Route::post('/admin/login', array('before'=>'csrf', 'uses'=>'UserController@postLogin')); 
