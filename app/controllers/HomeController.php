@@ -23,16 +23,4 @@ class HomeController extends BaseController {
            }
         }
         
-        public function createInquiries(){
-            if(Auth::check()){
-               return View::make('admin.inquiry'); 
-            } else {
-                return View::make('inquiry');
-            }
-            
-        }
-        
-        public function storeInquiries(){
-            
-        }
 }

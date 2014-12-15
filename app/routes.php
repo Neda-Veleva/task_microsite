@@ -15,8 +15,10 @@ Route::get('/', 'HomeController@home');
 
 Route::get('/information', 'HomeController@info');
 
-Route::get('/inquiries', 'HomeController@createInquiries');
-Route::post('/inquiries', 'HomeController@storeInquiries');
+Route::get('/inquiries', 'InquiryController@create');
+Route::post('/inquiries', 'InquiryController@store');
+
+Route::get('admin/inquiries', 'InquiryController@index');
 
 Route::get('/admin/logout', 'UserController@logout');
 

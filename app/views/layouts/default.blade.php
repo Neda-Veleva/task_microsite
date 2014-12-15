@@ -23,6 +23,9 @@
                     <li>
                         {{ HTML::Link('/admin/login', 'Sign In') }}
                     </li> 
+                    <li>
+                        {{ HTML::Link('/admin/page', 'Edit Page') }}
+                    </li>
                     @else
                     <li>
                         {{ HTML::Link('/admin/logout', 'Logout') }}
