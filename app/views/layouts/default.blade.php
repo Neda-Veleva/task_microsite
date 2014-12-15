@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>  
+        @section('head')
         <meta charset="UTF-8">        
+        @show      
     </head>
     <body>
         <header>                                  
-            <nav>
-                <ul>
-                    <li>
-                        {{ HTML::Link('/', 'Home Page') }}
-                    </li>
-                    <li>
-                        {{ HTML::Link('/information', 'Information Page') }}
-                    </li>
-                    <li>
-                        {{ HTML::Link('/inquiries', 'Contact Form') }}
-                    </li>
-                    @if(!Auth::check())
-                    <li>
-                        {{ HTML::Link('/admin/create', 'Sign Up') }}
-                    </li>
-                    <li>
-                        {{ HTML::Link('/admin/login', 'Sign In') }}
-                    </li> 
-                    <li>
-                        {{ HTML::Link('/admin/page', 'Edit Page') }}
-                    </li>
-                    @else
-                    <li>
-                        {{ HTML::Link('/admin/logout', 'Logout') }}
-                    </li>
-                    @endif
-                </ul>
-            </nav>
+            @include('navigation')
         </header>
         <div class="message">
             @if(Session::has('message'))

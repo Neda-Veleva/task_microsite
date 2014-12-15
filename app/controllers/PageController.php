@@ -9,7 +9,8 @@ class PageController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+            $pages = Page::all();
+            return View::make('pages.index')->with('pages', $pages);
 	}
 
 
@@ -20,7 +21,7 @@ class PageController extends \BaseController {
 	 */
 	public function create()
 	{
-            
+            return View::make('pages.create');
 	}
 
 
@@ -31,7 +32,19 @@ class PageController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+            $input = Input::all();
+            
+            $page = new Page();
+            
+            $validator = Page::validate($input);
+            if($validator->fails()){
+                return Redirect::to('admin/page/create')->withErrors($validator)->withInput()->with('message', 'Incorrect data!');
+            } else {
+                Page::newPage($input);
+                return Redirect::to('/admin/page/index')->with('message', 'Create new page!');
+            }   
+            
+            
 	}
 
 
@@ -43,7 +56,9 @@ class PageController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+            $page = Page::find($id);
+            
+            return View::make('pages.show')->with('page', $page);
 	}
 
 
@@ -55,7 +70,9 @@ class PageController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+            $page = Page::find($id);
+            
+            return View::make('pages.edit')->with('page', $page);
 	}
 
 
@@ -67,20 +84,17 @@ class PageController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+            $input = Input::all();                                
+            
+            $validator = Page::validate($input);
+            if($validator->fails()){
+                return Redirect::to('/admin/page/{id}/edit')->withErrors($validator)->withInput()->with('message', 'Incorrect data!');
+            } else {
+                $page_id = Page::find($id);
+                Page::updatePage($input, $page_id);
+                return Redirect::to('/admin/page/index')->with('message', 'Edit page!');
+            }
+
 	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 
 }

@@ -12,6 +12,17 @@ class Inquiry extends Eloquent {
         return $this->belongsTo('User');
     }
     
+    //Validation New Inquiry
+    public static $rules = array(
+        'email' => 'required',
+        'subject' => 'required',
+        'content' => 'required',       
+    );
+
+    public static function validate($input) {
+        return Validator::make($input, static::$rules);        
+    }
+    
     public static function saveInquiry($input) {
         $inquiry = new Inquiry();
         $inquiry->name = Input::get('name');
